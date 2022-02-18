@@ -17,6 +17,7 @@ MongoClient.connect(y,{
 }).then(client=>{
     console.log("DB connected");
     let db=client.db('Joke');
+    //db.open();
     let jokes=db.collection('Jokes');
     app.get('/',(req,res)=>{
         jokes.find().toArray().then(result=>{
@@ -73,6 +74,7 @@ MongoClient.connect(y,{
         })
 
     })*/
+    
 
 }).catch(err=>{
     console.error(err);
@@ -81,3 +83,10 @@ const PORT= process.env.PORT || 7800 ;
 app.listen(PORT,()=>{
     console.log(`Server is listening at ${PORT}...`);
 });
+
+/*process.on('SIGINT',function(){
+    MongoClient.close(function(){
+        console.log("DB closed...");
+        process.exit(0);
+    });
+});*/
